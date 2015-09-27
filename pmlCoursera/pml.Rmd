@@ -1,0 +1,154 @@
+---
+title: "Practical Machine Learning - Prediction of Weight Lifting Exercise"
+author: "Yao-Jen Kuo"
+date: "Sunday, September 27, 2015"
+output:
+  html_document:
+    theme: united
+    toc: true
+    highlight: tango
+    fig_width: 9
+    fig_height: 5
+    fig_caption: false
+---
+
+# Introduction
+
+This document describes the prediction of the manner in which the 6 participants did the exercise. And we will load our necessary libraries and set random seeds at the very beginning.
+
+```{r, message=F, warning=F}
+library(Hmisc)
+library(VIM)
+library(caret)
+library(randomForest)
+library(adabag)
+set.seed(123)
+```
+
+# Collecting Data
+
+The first step is to load the csv file data to dataframe.
+
+```{r}
+pmlOriginal <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv")
+```
+
+# Exploring and Manipulating Data
+
+## Exploring Data
+
+```{r, results='hide'}
+summary(pmlOriginal)
+describe(pmlOriginal)
+sapply(pmlOriginal, class)
+str(pmlOriginal)
+```
+```{r}
+aggr(pmlOriginal, prop=TRUE, numbers=FALSE)
+```
+
+After submitting various descriptive statistics, it is easy to see 2 main problems here: the #DIV/0! values and the huge amount of missing values.
+
+## Manipulating Data
+
+Besides dealing with #DIV/0! and missing values, we would also eliminate some columns to form our dataset of predicting features.
+
+### The #DIV/0! Values
+
+The #DIV/0! values result in wrongly importing numeric values as factor values. So we will reload the data again with an extra parameter `na.strings=c("#DIV/0!")` and force the specific columns (i.e. from the 8th to 159th) to be imported as numeric values.
+
+```{r}
+pmlOriginal <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", na.strings=c("#DIV/0!", "NA", ""))
+for(i in c(8:ncol(pmlOriginal)-1)){
+  pmlOriginal[,i] = as.numeric(as.character(pmlOriginal[,i]))
+  }
+```
+
+### Selecting Predicting Features
+
+Useless variables are like X, timestamps, new_window, num_window and user_name...etc.
+
+```{r}
+pmlFeatures <- pmlOriginal[,-(1:7)]
+```
+
+### The Missing Values
+
+In this step, we first calculate the number of NAs for each feature, then we select only the features with 0 NAs.
+
+```{r}
+sumOfNA <- colSums(is.na(pmlFeatures))
+nameOfFeatures <- colnames(pmlFeatures[sumOfNA == 0])
+pmlFeatures <- pmlFeatures[nameOfFeatures]
+aggr(pmlFeatures, prop=TRUE, numbers=FALSE)
+```
+
+# Training a Model on Data
+
+Now we've got a dataframe **pmlFeatures** with all the workable features with no missing values.
+
+## Checking Correlations
+
+```{r}
+cor <- abs(sapply(colnames(pmlFeatures[, -ncol(pmlFeatures)]), function(x) cor(as.numeric(pmlFeatures[, x]), as.numeric(pmlFeatures$classe), method = "spearman")))
+summary(cor)
+```
+
+There doesn't seem to be any strong predictors that correlates with classe well(say, maximum is only around 0.3,) so linear regression model is probably not suitable. Hence, we will adapt random forests algorithm for predicting our data.
+
+## Data Partition
+
+As usual, the first step is to split the dataset in two part : the first for training and the second for testing.
+
+```{r}
+featuresPartition <- createDataPartition(y=pmlFeatures$classe, p=0.7, list=FALSE)
+pmlTrain <- pmlFeatures[featuresPartition,]
+pmlTest <- pmlFeatures[-featuresPartition,]
+```
+
+## Random Forests
+
+We are using the Random Forests method here with 500 trees (as default.)
+
+```{r}
+modelRF <- randomForest(classe ~ ., data=pmlTrain)
+varImpPlot(modelRF)
+```
+
+# Evaluating Model Performance
+
+We will call confusion matrix to see the model performance.
+
+```{r}
+RFTest <- predict(modelRF, newdata=pmlTest)
+confusionMatrix(RFTest,pmlTest$classe)
+```
+
+The Random Forests model fits our dataset very well with an accuracy of 0.9944.
+
+# Applying to 20 Test Cases
+
+Now we will use our model to apply for the 20 test cases. The characteristics of the variable in test cases has to be the same as training cases.
+
+```{r}
+pmlTest20 <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv", na.strings=c("#DIV/0!", "NA", ""))
+for(i in c(8:ncol(pmlTest20)-1)){
+  pmlTest20[,i] = as.numeric(as.character(pmlTest20[,i]))
+  }
+predictionsTest20 <- predict(modelRF, newdata=pmlTest20)
+```
+
+## Results for Automatic Grader
+
+```{r, results='hide'}
+answer <- as.character(predictionsTest20)
+pml_write_files = function(x){
+  n = length(x)
+  for(i in 1:n){
+    filename = paste0("problem_id_",i,".txt")
+    write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+  }
+}
+#setwd("C:/Users/ASUS/Documents/ApplicationInR/pmlCoursera/predictionAssignmentSubmission")
+pml_write_files(answer)
+```
