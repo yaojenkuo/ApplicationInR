@@ -6,4 +6,4 @@ This repository collects some R applications covering machine learning and visua
 The highlights of this applications are:
 
 * How to deal with NA, #DIV/0!, and "".
-* How to use apapt a Random Forests algorithm.
+* How to apapt a Random Forests algorithm for classification.
