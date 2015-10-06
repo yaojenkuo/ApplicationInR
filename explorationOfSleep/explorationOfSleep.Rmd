@@ -13,6 +13,8 @@ output:
     fig_caption: false
 ---
 
+***
+
 # Introduction
 
 The typical procedure for a data analysis project starts with collecting data and then exploring data. In this document, we are going to introduce three common approaches to give us a basic understanding of our data: the pattern of missing values, the distribution of continuous variables, and the frequency of categorical variables.
