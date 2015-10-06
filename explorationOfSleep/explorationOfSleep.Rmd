@@ -34,7 +34,7 @@ summary(sleep)#The summary of sleep
 # The Pattern of Missing Values
 
 ```{r}
-aggr(sleep, combined=T, numbers=T, prop=F, main='Missing Pattern of Sleep', ylab='')#To draw the missing plot
+aggr(sleep, combined=T, numbers=T, prop=F, ylab='')#To draw the missing plot
 ```
 
 It is easily observed that there are missing values in the following variables: NonD, Dream, Sleep, Span, and Gest.
