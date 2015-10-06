@@ -15,42 +15,53 @@ output:
 
 # Introduction
 
-The typical procedure for a data analysis project starts with collecting data and then exploring data. In this document, we are going to introduce three common approaches to give us a basic understanding of our data: the pattern of missing values, the distribution of continuous variables, and the distribution of categorical variables.
+The typical procedure for a data analysis project starts with collecting data and then exploring data. In this document, we are going to introduce three common approaches to give us a basic understanding of our data: the pattern of missing values, the distribution of continuous variables, and the frequency of categorical variables.
 
 # The Data
 
-We are going to use the **sleep** data as our example dataset. This data originates from **Allison, T. and Chichetti, D. (1976) Sleep in mammals: ecological and constitutional correlates. Science 194 (4266), 732-734.** You can find the article from [here]<http://www.faculty.biol.ttu.edu/strauss/Multivar/Lab/AllisonCicchetti1976.pdf>.
+We are going to use the **sleep** data as our example dataset. This data originates from **Allison, T. and Chichetti, D. (1976) Sleep in mammals: ecological and constitutional correlates. Science 194 (4266), 732-734.** You can find the article from [here](http://www.faculty.biol.ttu.edu/strauss/Multivar/Lab/AllisonCicchetti1976.pdf).
 
 The **sleep** data is a data frame with 62 observations on 10 variables. We can take a glimpse quickly:
 
 ```{r, message=FALSE, warning=FALSE}
 library(VIM)
-str(sleep)
-summary(sleep)
+str(sleep)#The structure of sleep
+summary(sleep)#The summary of sleep
 ```
 
 # The Pattern of Missing Values
 
 ```{r}
-aggr(sleep, combined=T, numbers=T, prop=F, main='Missing Pattern of Sleep', ylab='')
+aggr(sleep, combined=T, numbers=T, prop=F, main='Missing Pattern of Sleep', ylab='')#To draw the missing plot
 ```
 
 It is easily observed that there are missing values in the following variables: NonD, Dream, Sleep, Span, and Gest.
 
-# Separating Sleep Data into integer and numeric
+# Separating Continuous Variables from Categorical Variables
 
 ```{r}
-indexInt <- sapply(sleep, is.integer)
-sleepIntVar <- sleep[, indexInt]
-sleepNumVar <- sleep[, !indexInt]
+indexInt <- sapply(sleep, is.integer)#find out which variable is integer
+sleepIntVar <- sleep[, indexInt]# as in categorical
+sleepNumVar <- sleep[, !indexInt]#as in continuous
 ```
 
-## The Distribution of Continuous Variables
+We are using histogram to explore the distribution of continuous variables and barplot to explore categorical variables.
+
+# The Distribution of Continuous Variables
 
 ```{r, fig.height=8}
+#To decide how to arrange our plots
+autoMfrow <- function(x){
+  if (x%%2==0){
+    par(mfrow=c((x)/2,2))
+  } else{
+    par(mfrow=c((x+1)/2,2))
+  }
+}
 numCnt <- ncol(sleepNumVar)
-par(mfrow=c((numCnt+1)/2,2))
+autoMfrow(numCnt)#To set the arrangement of plots
 numVarName <- names(sleepNumVar)
+#To plot all histograms for continuous values
 for (name in numVarName){
   histNum <- hist(sleepNumVar[,name],
        freq=FALSE,
@@ -62,12 +73,13 @@ for (name in numVarName){
 }
 ```
 
-## The Categorical Variable
+# The Frequency of Categorical Variables
 
 ```{r}
 intCnt <- ncol(sleepIntVar)
-par(mfrow=c((intCnt+1)/2,2))
+autoMfrow(intCnt)#To set the arrangement of plots
 intVarName <- names(sleepIntVar)
+#To plot all barplots for categorical values
 for (name in intVarName){
   barplotInt <- barplot(table(sleepIntVar[,name]),
        xlab=name,

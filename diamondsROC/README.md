@@ -3,7 +3,7 @@ This repository collects some R applications covering machine learning and visua
 
 ## 1. Drawing ROC Curves in R with ROCR Package
 
-The highlights of this applications are:
+The highlights of this application are:
 
 * Size matters, we can predict whether if the diamond is expensive by using only one predictor: carat.
 * How to draw a Kernal Density Curve in R.
