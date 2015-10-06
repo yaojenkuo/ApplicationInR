@@ -1,0 +1,78 @@
+---
+title: 'Exploratory Analysis at a Glance: Using sleep Data as an Example'
+author: "Yao-Jen Kuo"
+date: "Tuesday, October 06, 2015"
+output:
+  html_document:
+    theme: united
+    toc: true
+    toc_depth: 2
+    highlight: tango
+    fig_width: 8
+    fig_height: 5
+    fig_caption: false
+---
+
+# Introduction
+
+The typical procedure for a data analysis project starts with collecting data and then exploring data. In this document, we are going to introduce three common approaches to give us a basic understanding of our data: the pattern of missing values, the distribution of continuous variables, and the distribution of categorical variables.
+
+# The Data
+
+We are going to use the **sleep** data as our example dataset. This data originates from **Allison, T. and Chichetti, D. (1976) Sleep in mammals: ecological and constitutional correlates. Science 194 (4266), 732-734.** You can find the article from [here]<http://www.faculty.biol.ttu.edu/strauss/Multivar/Lab/AllisonCicchetti1976.pdf>.
+
+The **sleep** data is a data frame with 62 observations on 10 variables. We can take a glimpse quickly:
+
+```{r, message=FALSE, warning=FALSE}
+library(VIM)
+str(sleep)
+summary(sleep)
+```
+
+# The Pattern of Missing Values
+
+```{r}
+aggr(sleep, combined=T, numbers=T, prop=F, main='Missing Pattern of Sleep', ylab='')
+```
+
+It is easily observed that there are missing values in the following variables: NonD, Dream, Sleep, Span, and Gest.
+
+# Separating Sleep Data into integer and numeric
+
+```{r}
+indexInt <- sapply(sleep, is.integer)
+sleepIntVar <- sleep[, indexInt]
+sleepNumVar <- sleep[, !indexInt]
+```
+
+## The Distribution of Continuous Variables
+
+```{r, fig.height=8}
+numCnt <- ncol(sleepNumVar)
+par(mfrow=c((numCnt+1)/2,2))
+numVarName <- names(sleepNumVar)
+for (name in numVarName){
+  histNum <- hist(sleepNumVar[,name],
+       freq=FALSE,
+       col="skyblue",
+       xlab=name,
+       ylab='',
+       main=paste("Histogram of: ", name))
+  lines(density(sleepNumVar[,name], na.rm=TRUE), lwd=2, col="red")
+}
+```
+
+## The Categorical Variable
+
+```{r}
+intCnt <- ncol(sleepIntVar)
+par(mfrow=c((intCnt+1)/2,2))
+intVarName <- names(sleepIntVar)
+for (name in intVarName){
+  barplotInt <- barplot(table(sleepIntVar[,name]),
+       xlab=name,
+       col="skyblue",
+       main=paste("Barplot of: ", name))
+  text(x=barplotInt, y=table(sleepIntVar[,name])+2, labels=as.character(table(sleepIntVar[,name])), xpd=TRUE)
+}
+```
