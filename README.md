@@ -24,3 +24,9 @@ You can also find the .Rmd file [here](https://github.com/yaojenkuo/ApplicationI
 You may check the result created by Rmarkdown and Knitr [here](https://yaojenkuo.github.io/explorationOfSleep.html).
 
 You can also find the .Rmd file [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/explorationOfSleep).
+
+## 5. How to Make Choropleth Maps with R
+
+You may check the result created by Rmarkdown and Knitr [here](https://yaojenkuo.github.io/choroplethMap.html).
+
+You can also find the .Rmd file [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/choroplethMap).

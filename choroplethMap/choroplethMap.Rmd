@@ -1,0 +1,92 @@
+---
+title: 'How to Make Choropleth Maps with R'
+author: "Yao-Jen Kuo"
+date: "Sunday, October 11, 2015"
+output:
+  html_document:
+    theme: united
+    toc: true
+    toc_depth: 2
+    highlight: tango
+    fig_width: 7
+    fig_height: 5
+    fig_caption: false
+---
+
+***
+
+# Introduction
+
+There are plenty of ways to make choropleth maps in R. This example demonstrates the easiest way for beginners in my point of view. In this article, we will first load required packages, introduce GADM.org and its resources, then use a census of National Statistics, Taiwan to map a simple choropleth map to indicate the percentage of older population(say, over 65 years old) in each administrative area.
+
+# Required Packages
+
+In this article, we will be using the following packages:
+
+```{r, warning=FALSE, message=FALSE, results='hide'}
+packageNames <- c("plyr", "ggplot2","rgeos", "maptools", "scales", "raster")
+lapply(packageNames, library, character.only=TRUE)
+```
+
+# About GADM.org
+
+[GADM](http://gadm.org/) is a spatial database of the location of the world's administrative areas (or adminstrative boundaries) for use in GIS and similar software. Administrative areas in this database are countries and lower level subdivisions.
+
+## Get Data from GADM with **raster**
+
+You can find that there are three levels of **SpatialPolygonDataFrame** for Taiwan [here](http://gadm.org/country). Let us get all three of them and see what are the differences between them.
+
+```{r}
+twDist0 <- getData('GADM', country='TW', level=0)
+twDist1 <- getData('GADM', country='TW', level=1)
+twDist2 <- getData('GADM', country='TW', level=2)
+```
+
+Let us plot all of them.
+
+```{r}
+plot(twDist0)
+plot(twDist1)
+plot(twDist2)
+```
+
+Now you can see the difference clearly and we will use the level2 data for our choropleth map.
+
+# Data of National Statistics, Taiwan
+
+We downloaded our data from [National Statistics, Taiwan](http://statdb.dgbas.gov.tw/pxweb/dialog/statfile9.asp). After a bit of manipulation, the data looks like this.
+
+```{r}
+setwd("C:/Users/ASUS/Documents/ApplicationInR/countyIndicatorTW")
+twIndex <- read.csv("data/countyStat.csv")
+head(twIndex)
+```
+
+We will use the variable **oldPercent**.
+
+# Data Manipulation
+
+The administrative area of Taiwan somehow is a bit different to the one downloaded from GADM.org. So we will modify our map data and statistics data accordingly.
+
+```{r}
+twDist2 <- fortify(twDist2, region = "NAME_2")#fortify function helps us transform a SpatialPolygonDataFrame into a data frame, which is easier to manipulate.
+twDist2$id[twDist2$id=='Taichung'] <- 'Taichung City'
+twDist2$id[twDist2$id=='Tainan'] <- 'Tainan City'
+twDist2$id[twDist2$id=='Kaohsiung'] <- 'Kaohsiung City'
+twIndexAvg <- ddply(twIndex, .(id), summarize, oldPercentAvg = mean(oldPercent), socialIncreaseAvg=mean(socialIncrease), unemploymentAvg=mean(unemployment))#We just roughly average the indicators of 2 counties if they are merged in data from GADM.
+```
+
+# Plot with ggplot2
+
+```{r}
+ggplot() + geom_map(data=twIndex, aes(map_id = id, fill = oldPercent), map = twDist2) + expand_limits(x = twDist2$long, y = twDist2$lat)
+```
+
+## Make it Prettier
+
+Let's make the choropleth map prettier by revising its color and putting tags of county on it.
+
+```{r, warning=FALSE, message=FALSE}
+distanceCenter <- ddply(twDist2, .(id), summarize, latCenter = mean(lat), longCenter = mean(long))
+ggplot() + geom_map(data=twIndex, aes(map_id = id, fill = oldPercent), map = twDist2) + expand_limits(x = twDist2$long, y = twDist2$lat) + scale_fill_gradient2(low = "white",  mid = "palevioletred1", midpoint = mean(twIndex$oldPercent), high = muted("palevioletred4"), limits = c(min(twIndex$oldPercent)-3, max(twIndex$oldPercent)+3))+geom_text(data = distanceCenter, aes(x = longCenter, y = latCenter, label = id, size = 0.2))+xlab("")+ylab("")+ggtitle("Older Population in Taiwan")
+```
