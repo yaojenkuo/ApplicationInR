@@ -33,6 +33,6 @@ You can also find the .Rmd file [here](https://github.com/yaojenkuo/ApplicationI
 
 ## 6. How to Make a GeoJSON File with R
 
-You may check the result created by Leaflet.js [here](https://yaojenkuo.github.io/worldGenderRatio.html).
+You may check the result created by Leaflet.js [here](http://yaojenkuo.github.io/worldGenderRatio.html).
 
 You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/worldGenderRatio).
