@@ -26,7 +26,7 @@ integratedData <- merge(shpTW2, dropJHAvg, by.x="NAME_2", by.y="county", all.x=T
 rownames(integratedData) <- rownames(shpTW2)#Very important!
 
 # Convert dataframe file to GeoJSON
-spdf <- SpatialPolygonsDataFrame(shpTW, data=integratedData)
+spdf <- SpatialPolygonsDataFrame(shpTWSimply, data=integratedData)
 writeOGR(spdf, 'counties.js', layer="", driver="GeoJSON")
 
-# Remember to add: var twnCountyDropRate = at the beginning of twnCountyDropRate.geojson
+# Remember to add: var twnCountyDropRate = at the beginning of counties.js
