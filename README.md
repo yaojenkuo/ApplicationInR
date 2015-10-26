@@ -36,3 +36,9 @@ You can also find the .Rmd file [here](https://github.com/yaojenkuo/ApplicationI
 You may check the result created by Leaflet.js [here](http://yaojenkuo.github.io/worldGenderRatio.html).
 
 You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/worldGenderRatio).
+
+## 7. How to Make a GeoJSON File with TW Shapefile
+
+You may check the result created by Leaflet.js [here](http://yaojenkuo.github.io/twnCountyDropRate.html).
+
+You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/twnCountyDropRate).
