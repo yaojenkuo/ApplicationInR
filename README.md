@@ -42,3 +42,9 @@ You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/
 You may check the result created by Leaflet.js [here](http://yaojenkuo.github.io/twnCountyDropRate.html).
 
 You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/twnCountyDropRate).
+
+## 8. Interactive earthquakes visualization near Taiwan
+
+You may check the result created by Shiny [here](https://yaojenkuo.shinyapps.io/quakesTW).
+
+You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/quakesTW).
