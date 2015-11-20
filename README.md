@@ -48,3 +48,9 @@ You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/
 You may check the result created by Shiny [here](https://yaojenkuo.shinyapps.io/quakesTW).
 
 You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/quakesTW).
+
+## 9. Major Islamic State Attacks in 2015
+
+You may check the result created by Leaflet.js [here](https://yaojenkuo.github.io/ISAttacks2015.html).
+
+You can find the R code [here](https://github.com/yaojenkuo/ApplicationInR/tree/master/ISAttacks2015).
