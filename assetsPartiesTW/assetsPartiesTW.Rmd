@@ -1,0 +1,59 @@
+---
+title: "如何使用R正確視覺化台灣政黨黨產"
+author: "Yao-Jen Kuo"
+date: "Sunday, December 27, 2015"
+output: html_document
+---
+
+# 簡介
+
+TVBS新聞在2015/12/24 20:59(更新時間 2015/12/25 20:50)發布的新聞**選前再追黨產! 綠拚國會過半立政黨法**中，利用Bar Chart做了黨產的視覺化，一時廣為網友流傳，帶來許多歡樂:
+
+![TVBS新聞截圖](C:/ApplicationInR/assetsPartiesTW/tvbs.jpg)
+
+本文章介紹如何使用R正確視覺化台灣政黨黨產。
+
+---
+
+# 資料
+
+繪圖之前要找資料，TVBS的黨產資料同樣來自**內政部民政司**網站中的[103 年政黨財務申報](http://www.moi.gov.tw/dca/03caucus_10301.aspx)，其中該年度有會計師簽證的政黨只有四個：中國國民黨、民主進步黨、親民黨與台灣團結聯盟(順序依編號，由小至大。)
+
+```{r}
+parties <- c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟")
+assetInMillionNTD <- c(25570, 479, 3, 21)
+```
+
+---
+
+# Packages
+
+這次我們會用3種方式來做黨產視覺化，其中**Base Plotting System**
+
+* Base Plotting System
+* ggplot2
+* plotly
+
+---
+
+# Visualization
+
+## Base Plotting System
+
+## ggplot2
+
+## plotly
+
+---
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
