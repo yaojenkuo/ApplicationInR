@@ -1,19 +1,6 @@
----
-title: "如何使用R正確視覺化台灣政黨黨產"
-author: "Yao-Jen Kuo"
-date: "Sunday, December 27, 2015"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    number_sections: false
-    theme: united
-    highlight: tango
-    keep_md: true
-    fig_width: 9
-    fig_height: 6.5
-    fig_caption: true
----
+# 如何使用R正確視覺化台灣政黨黨產
+Yao-Jen Kuo  
+Sunday, December 27, 2015  
 
 # 簡介
 
@@ -29,8 +16,16 @@ TVBS新聞在2015/12/24 20:59(更新時間 2015/12/25 20:50)發布的新聞**選
 
 繪圖之前要找資料，TVBS的黨產資料同樣來自**內政部民政司**網站中的[103 年政黨財務申報](http://www.moi.gov.tw/dca/03caucus_10301.aspx)，其中該年度有會計師簽證的政黨只有四個：中國國民黨、民主進步黨、親民黨與台灣團結聯盟(順序依編號，由小至大。)
 
-```{r}
+
+```r
 Sys.setlocale(category = "LC_ALL", locale = "cht")
+```
+
+```
+## [1] "LC_COLLATE=Chinese (Traditional)_Taiwan.950;LC_CTYPE=Chinese (Traditional)_Taiwan.950;LC_MONETARY=Chinese (Traditional)_Taiwan.950;LC_NUMERIC=C;LC_TIME=Chinese (Traditional)_Taiwan.950"
+```
+
+```r
 parties <- c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟")
 partiesEn <- c("KMT", "DPP", "PFP", "TSU")
 assetInMillionNTD <- c(25570, 479, 3, 21)
@@ -47,16 +42,31 @@ partiesAsset <- data.frame(parties, partiesEn, assetInMillionNTD, color)
 * Base Plotting System
 * ggplot2
 
-```{r}
+
+```r
 #install.packages("ggplot2")
 library(ggplot2)
 ```
 
 * plotly
 
-```{r}
+
+```r
 #install.packages("plotly")
 library(plotly)
+```
+
+```
+## 
+## Attaching package: 'plotly'
+## 
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+## 
+## The following object is masked from 'package:graphics':
+## 
+##     layout
 ```
 
 ---
@@ -65,21 +75,28 @@ library(plotly)
 
 * Base Plotting System
 
-```{r}
+
+```r
 basebp <- barplot(partiesAsset$assetInMillionNTD, names.arg=partiesAsset$parties, col=color, cex.names=0.8, border=NA, ylim=c(0,30000), main=paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"), sub="資料來源:內政部民政司")
 text(x=basebp, y=partiesAsset$assetInMillionNTD, label=partiesAsset$assetInMillionNTD, pos = 3, cex = 0.8)
 ```
 
+![](assetsPartiesTW_files/figure-html/unnamed-chunk-4-1.png) 
+
 * ggplot2
 
-```{r}
+
+```r
 ggplotbp <- ggplot(data=partiesAsset, aes(x=partiesEn, y=assetInMillionNTD))+geom_bar(colour=NA, fill=c("green", "blue", "orange", "goldenrod"), width=.8, stat="identity")+ ggtitle(paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"))+ylab("")+xlab("資料來源:內政部民政司")+geom_text(aes(label=assetInMillionNTD), vjust = -0.5)
 ggplotbp
 ```
 
+![](assetsPartiesTW_files/figure-html/unnamed-chunk-5-1.png) 
+
 * plotly
 
-```{r}
+
+```r
 plotlybp <- plot_ly(
   x=c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟"),
   y=c(25570, 479, 3, 21),
@@ -88,7 +105,19 @@ plotlybp <- plot_ly(
   filename="bar",
   color = c("blue", "green", "orange", "goldenrod")
   )
+```
+
+```
+## Warning in plot_ly(x = c("中國國民黨", "民主進步黨", "親民黨", "台灣團結聯
+## 盟"), : Ignoring filename. Use plotly_POST() if you want to post figures to
+## plotly.
+```
+
+```r
 plotlybp
 ```
+
+<!--html_preserve--><div id="htmlwidget-170" style="width:864px;height:624px;" class="plotly"></div>
+<script type="application/json" data-for="htmlwidget-170">{"x":{"data":[{"type":"bar","inherit":true,"x":["中國國民黨"],"y":[25570],"name":"blue","filename":"bar","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["民主進步黨"],"y":[479],"name":"green","filename":"bar","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["親民黨"],"y":[3],"name":"orange","filename":"bar","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["台灣團結聯盟"],"y":[21],"name":"goldenrod","filename":"bar","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","filename":"bar","layout.1":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"}}},"evals":[]}</script><!--/html_preserve-->
 
 ---
