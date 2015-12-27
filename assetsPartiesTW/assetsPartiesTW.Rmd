@@ -2,7 +2,17 @@
 title: "如何使用R正確視覺化台灣政黨黨產"
 author: "Yao-Jen Kuo"
 date: "Sunday, December 27, 2015"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: false
+    theme: united
+    highlight: tango
+    keep_md: true
+    fig_width: 9
+    fig_height: 6.5
+    fig_caption: true
 ---
 
 # 簡介
@@ -21,9 +31,10 @@ TVBS新聞在2015/12/24 20:59(更新時間 2015/12/25 20:50)發布的新聞**選
 
 ```{r}
 parties <- c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟")
+partiesEn <- c("KMT", "DPP", "PFP", "TSU")
 assetInMillionNTD <- c(25570, 479, 3, 21)
 color <- c("blue", "green", "orange", "goldenrod")
-partiesAsset <- data.frame(parties, assetInMillionNTD, color)
+partiesAsset <- data.frame(parties, partiesEn, assetInMillionNTD, color)
 ```
 
 ---
@@ -36,14 +47,14 @@ partiesAsset <- data.frame(parties, assetInMillionNTD, color)
 * ggplot2
 
 ```{r}
-#install.packages("ggplot2")
+install.packages("ggplot2")
 library(ggplot2)
 ```
 
 * plotly
 
 ```{r}
-#install.packages("plotly")
+install.packages("plotly")
 library(plotly)
 ```
 
@@ -61,9 +72,20 @@ text(x=basebp, y=partiesAsset$assetInMillionNTD, label=partiesAsset$assetInMilli
 * ggplot2
 
 ```{r}
-ggplotbp <- ggplot(data=partiesAsset, aes(x=parties, y=assetInMillionNTD, fill=color))+geom_bar(colour=NA, fill=color, width=.8, stat="identity")+ ggtitle(paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"))
+ggplotbp <- ggplot(data=partiesAsset, aes(x=partiesEn, y=assetInMillionNTD))+geom_bar(colour=NA, fill=c("green", "blue", "orange", "goldenrod"), width=.8, stat="identity")+ ggtitle(paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"))+ylab("")+xlab("資料來源:內政部民政司")+geom_text(aes(label=assetInMillionNTD), vjust = -0.5)
+ggplotbp
 ```
 
 * plotly
+
+```{r}
+plotlybp <- plot_ly(
+  x=c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟"),
+  y=c(25570, 479, 3, 21),
+  name="民國103年政黨財務申報(具會計師簽證)",
+  type="bar"
+  )
+plotlybp
+```
 
 ---
