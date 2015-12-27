@@ -22,38 +22,48 @@ TVBS新聞在2015/12/24 20:59(更新時間 2015/12/25 20:50)發布的新聞**選
 ```{r}
 parties <- c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟")
 assetInMillionNTD <- c(25570, 479, 3, 21)
+color <- c("blue", "green", "orange", "goldenrod")
+partiesAsset <- data.frame(parties, assetInMillionNTD, color)
 ```
 
 ---
 
 # Packages
 
-這次我們會用3種方式來做黨產視覺化，其中**Base Plotting System**
+這次我們會用3種方式來做黨產視覺化，其中**Base Plotting System**是R內建的繪圖功能，使用前不需要安裝/讀取套件，但是ggplot2與plotly在使用前必須另外安裝/讀取套件。
 
 * Base Plotting System
 * ggplot2
+
+```{r}
+#install.packages("ggplot2")
+library(ggplot2)
+```
+
 * plotly
+
+```{r}
+#install.packages("plotly")
+library(plotly)
+```
 
 ---
 
 # Visualization
 
-## Base Plotting System
-
-## ggplot2
-
-## plotly
-
----
+* Base Plotting System
 
 ```{r}
-summary(cars)
+basebp <- barplot(partiesAsset$assetInMillionNTD, names.arg=partiesAsset$parties, col=color, cex.names=0.8, border=NA, ylim=c(0,30000), main=paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"), sub="資料來源:內政部民政司")
+text(x=basebp, y=partiesAsset$assetInMillionNTD, label=partiesAsset$assetInMillionNTD, pos = 3, cex = 0.8)
 ```
 
-You can also embed plots, for example:
+* ggplot2
 
-```{r, echo=FALSE}
-plot(cars)
+```{r}
+ggplotbp <- ggplot(data=partiesAsset, aes(x=parties, y=assetInMillionNTD, fill=color))+geom_bar(colour=NA, fill=color, width=.8, stat="identity")+ ggtitle(paste("民國103年政黨財務申報(具會計師簽證)","\n","單位:新台幣百萬元"))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+* plotly
+
+---
