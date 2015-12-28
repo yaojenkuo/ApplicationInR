@@ -106,7 +106,7 @@ plotlybp <- plot_ly(
 plotlybp
 ```
 
-<!--html_preserve--><div id="htmlwidget-3754" style="width:864px;height:624px;" class="plotly"></div>
-<script type="application/json" data-for="htmlwidget-3754">{"x":{"data":[{"type":"bar","inherit":true,"x":["KMT"],"y":[25570],"name":"KMT","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["DPP"],"y":[479],"name":"DPP","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["PFP"],"y":[3],"name":"PFP","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["TSU"],"y":[21],"name":"TSU","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","layout.1":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"}},"filename":"partiesEn vs. assetInMillionNTD"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-9551" style="width:864px;height:624px;" class="plotly"></div>
+<script type="application/json" data-for="htmlwidget-9551">{"x":{"data":[{"type":"bar","inherit":true,"x":["KMT"],"y":[25570],"name":"KMT","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["DPP"],"y":[479],"name":"DPP","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["PFP"],"y":[3],"name":"PFP","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["TSU"],"y":[21],"name":"TSU","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","layout.1":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"}},"filename":"partiesEn vs. assetInMillionNTD"},"evals":[]}</script><!--/html_preserve-->
 
 ---
