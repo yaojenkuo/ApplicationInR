@@ -159,19 +159,14 @@ ggplotbp</code></pre>
 <li>plotly</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r">plotlybp &lt;-<span class="st"> </span><span class="kw">plot_ly</span>(
-  <span class="dt">x=</span><span class="kw">c</span>(<span class="st">&quot;中國國民黨&quot;</span>,<span class="st">&quot;民主進步黨&quot;</span>,<span class="st">&quot;親民黨&quot;</span>,<span class="st">&quot;台灣團結聯盟&quot;</span>),
-  <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">25570</span>, <span class="dv">479</span>, <span class="dv">3</span>, <span class="dv">21</span>),
-  <span class="dt">name=</span><span class="st">&quot;民國103年政黨財務申報(具會計師簽證)&quot;</span>,
+  <span class="dt">x=</span>partiesEn,
+  <span class="dt">y=</span>assetInMillionNTD,
   <span class="dt">type=</span><span class="st">&quot;bar&quot;</span>,
-  <span class="dt">filename=</span><span class="st">&quot;bar&quot;</span>,
-  <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;goldenrod&quot;</span>)
-  )</code></pre>
-<pre><code>## Warning in plot_ly(x = c(&quot;中國國民黨&quot;, &quot;民主進步黨&quot;, &quot;親民黨&quot;, &quot;台灣團結聯
-## 盟&quot;), : Ignoring filename. Use plotly_POST() if you want to post figures to
-## plotly.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">plotlybp</code></pre>
-<p><div id="htmlwidget-170" style="width:864px;height:624px;" class="plotly"></div>
-<script type="application/json" data-for="htmlwidget-170">{"x":{"data":[{"type":"bar","inherit":true,"x":["中國國民黨"],"y":[25570],"name":"blue","filename":"bar","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["民主進步黨"],"y":[479],"name":"green","filename":"bar","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["親民黨"],"y":[3],"name":"orange","filename":"bar","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["台灣團結聯盟"],"y":[21],"name":"goldenrod","filename":"bar","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","filename":"bar","layout.1":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"}}},"evals":[]}</script></p>
+  <span class="dt">color=</span>partiesEn
+  )
+plotlybp</code></pre>
+<p><div id="htmlwidget-3754" style="width:864px;height:624px;" class="plotly"></div>
+<script type="application/json" data-for="htmlwidget-3754">{"x":{"data":[{"type":"bar","inherit":true,"x":["KMT"],"y":[25570],"name":"KMT","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["DPP"],"y":[479],"name":"DPP","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["PFP"],"y":[3],"name":"PFP","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["TSU"],"y":[21],"name":"TSU","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","layout.1":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"}},"filename":"partiesEn vs. assetInMillionNTD"},"evals":[]}</script></p>
 <hr />
 </div>
 

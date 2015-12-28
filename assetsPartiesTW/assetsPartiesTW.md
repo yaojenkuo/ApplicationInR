@@ -98,26 +98,15 @@ ggplotbp
 
 ```r
 plotlybp <- plot_ly(
-  x=c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟"),
-  y=c(25570, 479, 3, 21),
-  name="民國103年政黨財務申報(具會計師簽證)",
+  x=partiesEn,
+  y=assetInMillionNTD,
   type="bar",
-  filename="bar",
-  color = c("blue", "green", "orange", "goldenrod")
+  color=partiesEn
   )
-```
-
-```
-## Warning in plot_ly(x = c("中國國民黨", "民主進步黨", "親民黨", "台灣團結聯
-## 盟"), : Ignoring filename. Use plotly_POST() if you want to post figures to
-## plotly.
-```
-
-```r
 plotlybp
 ```
 
-<!--html_preserve--><div id="htmlwidget-170" style="width:864px;height:624px;" class="plotly"></div>
-<script type="application/json" data-for="htmlwidget-170">{"x":{"data":[{"type":"bar","inherit":true,"x":["中國國民黨"],"y":[25570],"name":"blue","filename":"bar","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["民主進步黨"],"y":[479],"name":"green","filename":"bar","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["親民黨"],"y":[3],"name":"orange","filename":"bar","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["台灣團結聯盟"],"y":[21],"name":"goldenrod","filename":"bar","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","filename":"bar","layout.1":{"xaxis":{"title":"c(\"中國國民黨\", \"民主進步黨\", \"親民黨\", \"台灣團結聯盟\")"},"yaxis":{"title":"c(25570, 479, 3, 21)"}}},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-3754" style="width:864px;height:624px;" class="plotly"></div>
+<script type="application/json" data-for="htmlwidget-3754">{"x":{"data":[{"type":"bar","inherit":true,"x":["KMT"],"y":[25570],"name":"KMT","marker":{"color":"#66C2A5"}},{"type":"bar","inherit":true,"x":["DPP"],"y":[479],"name":"DPP","marker":{"color":"#FC8D62"}},{"type":"bar","inherit":true,"x":["PFP"],"y":[3],"name":"PFP","marker":{"color":"#8DA0CB"}},{"type":"bar","inherit":true,"x":["TSU"],"y":[21],"name":"TSU","marker":{"color":"#E78AC3"}}],"layout":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":null,"width":null,"height":null,"base_url":"https://plot.ly","layout.1":{"xaxis":{"title":"partiesEn"},"yaxis":{"title":"assetInMillionNTD"}},"filename":"partiesEn vs. assetInMillionNTD"},"evals":[]}</script><!--/html_preserve-->
 
 ---
