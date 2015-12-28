@@ -81,12 +81,10 @@ ggplotbp
 
 ```{r}
 plotlybp <- plot_ly(
-  partiesAsset,
-  x=parties,
+  x=partiesEn,
   y=assetInMillionNTD,
-  name="民國103年政黨財務申報(具會計師簽證)",
   type="bar",
-  color = c("blue", "green", "orange", "goldenrod")
+  color=partiesEn
   )
 plotlybp
 ```
