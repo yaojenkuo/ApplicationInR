@@ -81,11 +81,11 @@ ggplotbp
 
 ```{r}
 plotlybp <- plot_ly(
-  x=c("中國國民黨","民主進步黨","親民黨","台灣團結聯盟"),
-  y=c(25570, 479, 3, 21),
+  partiesAsset,
+  x=parties,
+  y=assetInMillionNTD,
   name="民國103年政黨財務申報(具會計師簽證)",
   type="bar",
-  filename="bar",
   color = c("blue", "green", "orange", "goldenrod")
   )
 plotlybp
