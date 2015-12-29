@@ -12,7 +12,7 @@ output:
 
 # Introduction
 
-TVBS published a news on 2015/12/24 20:59(updated 2015/12/25 20:50) __選前再追黨產! 綠拚國會過半立政黨法__ and use Bar Chart as a visualization to compare properties between political parties. The screenshot was widely-spreaded online:
+TVBS published a news on 2015/12/24 20:59(updated 2015/12/25 20:50) __選前再追黨產! 綠拚國會過半立政黨法__ and use Bar Chart as a visualization to compare properties between political parties. The screenshot was widely-spread online:
 
 ![Screenshot of TVBS News](tvbs.jpg)
 
