@@ -9,7 +9,6 @@ random.int.generate <- function(n = 6, min = -10, max = 10){
 
 # A function that is able to generate the result vector of N + M for the x_vector
 generate.result.vector <- function() {
-  x_vector <- low_threshold:high_threshold
   x_j_vector <- rep(NA, times = length(random_int))
   N_plus_M_vector <- rep(NA, times = length(x_vector))
   for (j in 1:length(x_vector)) {
@@ -28,8 +27,10 @@ generate.result.vector <- function() {
 # Assign inputs
 low_threshold <- 0L
 high_threshold <- 25L
+x_vector <- low_threshold:high_threshold
 random_int <- random.int.generate()
 N_plus_M_vector <- generate.result.vector()
 
 # Find out X
-answers <- which(N_plus_M_vector == min(N_plus_M_vector)) - 1
+answers_index <- which(N_plus_M_vector == min(N_plus_M_vector))
+answers <- x_vector[answers_index]
